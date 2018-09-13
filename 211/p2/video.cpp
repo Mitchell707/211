@@ -13,7 +13,14 @@ Video::Video(string t, string u, string c, float l, int r)
 
 void Video::print()
 {
-    cout << title << ", " << URL << ", " << comment << ", " << length << ", " << rating << endl;
+    cout << title << ", " << URL << ", " << comment << ", " << length << ", ";
+
+    for( int i = 0; i < rating; i++)
+    {
+        cout << "*";
+    }
+
+    cout << endl;
 
 }
 
