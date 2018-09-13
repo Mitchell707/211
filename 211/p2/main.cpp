@@ -56,7 +56,16 @@ int main()
     if(sorting == "length")
     {   
         lengthSort();
-        //cout << "sorted Length" << endl;
+        
+    }
+    else if(sorting == "rating")
+    {
+        ratingSort();
+
+    }
+    else if(sorting == "title")
+    {
+        titleSort();
     }
 
     for(int i = 0; i < count; i++)
