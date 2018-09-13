@@ -56,7 +56,7 @@ int main()
     if(sorting == "length")
     {   
         lengthSort();
-        cout << "sorted Length" << endl;
+        //cout << "sorted Length" << endl;
     }
 
     for(int i = 0; i < count; i++)
@@ -69,11 +69,13 @@ int main()
 
 void swap(Video* x, Video* y)
 {
-    Video* temp = x;
+    Video temp = *x;
 
-    x = y;
+    *x = *y;
 
-    y = temp;
+    *y = temp;
+
+    return;
 }
 
 void lengthSort()
@@ -84,16 +86,37 @@ void lengthSort()
         {
             if(vid[cur]->longer(vid[cur+1]))
             {           
-                //swap(vid[cur], vid[cur+1]);
-
-                Video* temp = vid[cur];
-
-                vid[cur] = vid[cur+1];
-
-                vid[cur+1] = temp;
-
-                cout << "swap" << endl;
+                swap(vid[cur], vid[cur+1]);
+             
             }   
+        }
+    }
+}
+
+void ratingSort()
+{
+    for(int last = count - 1; last > 0; last--)
+    {
+        for( int cur = 0; cur < last; cur++)
+        {
+            if(vid[cur]->rate(vid[cur+1]))
+            {
+                swap(vid[cur], vid[cur+1]);
+            }
+        }
+    }
+}
+
+void titleSort()
+{
+    for(int last = count - 1; last > 0; last--)
+    {
+        for(int cur = 0; cur < last; cur++)
+        {
+            if(vid[cur]->alpha(vid[cur+1]))
+            {
+                swap(vid[cur], vid[cur+1]);
+            }
         }
     }
 }
