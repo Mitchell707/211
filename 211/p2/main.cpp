@@ -15,6 +15,8 @@ int rating = 0;
 
 int count = 0;
 
+const int MAX = 100;
+
 Video* vid[100];
 
 void lengthSort();
@@ -51,6 +53,11 @@ int main()
 
         vid[count] = new Video(title, URL, comment, length, rating);
         count++;
+
+        if(count >= MAX)
+        {
+            cerr << "Too many videos, giving up." << endl;
+        }
     }
 
     if(sorting == "length")
