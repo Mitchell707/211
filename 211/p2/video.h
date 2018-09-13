@@ -13,7 +13,7 @@ class Video
         void print();
    
         bool longer(Video* other) {return length > other->length;};
-        bool rate(Video* other) {return rating > other->rating;};
+        bool rate(Video* other) {return rating < other->rating;};
         bool alpha(Video* other) {return title > other->title;};
 
     private:
