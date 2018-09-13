@@ -54,9 +54,10 @@ int main()
         vid[count] = new Video(title, URL, comment, length, rating);
         count++;
 
-        if(count >= MAX)
+        if(count > MAX)
         {
             cerr << "Too many videos, giving up." << endl;
+            return 1;
         }
     }
 
