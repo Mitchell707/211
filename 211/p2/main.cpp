@@ -30,7 +30,7 @@ int main()
     
     cin >> sorting;
 
-    if(!(sorting == "rating" || sorting == "length" || sorting == "title"))
+    if(!(sorting == "rating" || sorting == "length" || sorting == "title")) //Illegal sorting method check
     {
         cerr << sorting << " is not a legal sorting method, giving up." << endl;
         return 1;
@@ -38,14 +38,14 @@ int main()
         
     cin.ignore();
 
-    while(cin.peek() != EOF)
+    while(cin.peek() != EOF) //Continues till end of input
     {
         getline(cin, title);
     
         getline(cin, URL);
 
         getline(cin, comment);
-
+        //getlines allow for spaces in entrys
         cin >> length;
         cin >> rating;
 
@@ -54,14 +54,14 @@ int main()
         vid[count] = new Video(title, URL, comment, length, rating);
         count++;
 
-        if(count > MAX)
+        if(count > MAX) //Limits input to 100 videos
         {
             cerr << "Too many videos, giving up." << endl;
             return 1;
         }
     }
 
-    if(sorting == "length")
+    if(sorting == "length") //sorts using given method
     {   
         lengthSort();
         
@@ -95,7 +95,7 @@ void swap(Video* x, Video* y)
     return;
 }
 
-void lengthSort()
+void lengthSort() //Uses bubble sort algorithm for sorting
 {
     for(int last = count - 1; last > 0; last--)
     {
