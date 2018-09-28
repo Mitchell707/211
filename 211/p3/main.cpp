@@ -38,7 +38,12 @@ int main()
         else if(command == "lookup")
         {
             getline(cin, title);
-            vid.search(title);
+            if(!vid.search(title))
+            {
+                cerr << "Title " << title << " not in list."
+                return 1;
+
+            }
         }
         else if(command == "remove")
         {

@@ -32,7 +32,7 @@ bool List::remove(string name)
     {
         Node *cur = m_head;
 
-        while(cur->m_next)
+        while(cur)
         {
             if(cur->m_next->m_value->getTitle() == name)
             {
@@ -104,7 +104,7 @@ void List::print()
     }
 }
 
-void List::search(string name)
+bool List::search(string name)
 {
     Node *cur = m_head;
 
@@ -113,9 +113,9 @@ void List::search(string name)
         if(cur->m_value->getTitle() == name)
         {
             cur->m_value->print();
-            return;
+            return true;
         }
         cur = cur->m_next;
     }
-    cerr << "Title <" << name << "> not in list." << endl;
+    return false;
 }
