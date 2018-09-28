@@ -28,11 +28,19 @@ bool List::remove(string name)
     {
         return false;
     }
+    else if(m_head->m_value->getTitle() == name)
+    {
+        Node *cur = m_head;
+        m_head = m_head->m_next;
+        delete cur->m_value;
+        delete cur;
+        m_length--;
+    }   
     else
     {
         Node *cur = m_head;
 
-        while(cur)
+        while(cur->m_next != NULL)
         {
             if(cur->m_next->m_value->getTitle() == name)
             {
