@@ -45,12 +45,14 @@ int main()
             getline(cin, title);
             if(!vid.remove(title))
             {
-                cerr << "Title <" << title << "> is not a legal command, giving up."<< endl;
+                cerr << "Title <" << title << "> not in list, could not delete."<< endl;
+                return 1;
             }
         }
         else
         {
             cerr << "<" << command << "> is not a legal command, giving up." << endl;
+            return 1;
         }
 
     }
