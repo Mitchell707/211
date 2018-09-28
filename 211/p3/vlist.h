@@ -15,7 +15,7 @@ class List
         void insert(Video *video);
         void print();
         int length() {return m_length;}
-        void search(string name);
+        bool search(string name);
         bool remove(string name);
         bool freeName(string title);
         
