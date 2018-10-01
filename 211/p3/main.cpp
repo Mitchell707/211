@@ -1,3 +1,7 @@
+//main.cpp
+//Beck, Mitchell
+//mbeck16
+
 #include <iostream>
 #include <string>
 #include "video.h"
@@ -51,7 +55,7 @@ int main()
             if(!vid.remove(title))
             {
                 cerr << "Title <" << title << "> not in list, could not delete."<< endl;
-                return 1;
+                //return 1;
             }
         }
         else

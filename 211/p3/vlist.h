@@ -1,3 +1,7 @@
+//vlist.h
+//Beck, Mitchell
+//mbeck16
+
 #ifndef VLIST_H
 #define VLIST_H
 

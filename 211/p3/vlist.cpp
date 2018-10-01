@@ -1,3 +1,7 @@
+//vlist.cpp
+//Beck, Mitchell
+//mbeck16
+
 #include <iostream>
 #include <string>
 #include "video.h"
