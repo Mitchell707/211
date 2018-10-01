@@ -20,13 +20,13 @@ List::~List()
     while (m_head)
     {
         Node *tmp = m_head;
-        m_head = m_head->m_next;
+        m_head = m_head->m_next; //Sets the next link to the head
         delete tmp->m_value;
         delete tmp;
     }
 }
 
-bool List::remove(string name)
+bool List::remove(string name) //deletes named video
 {
 
     Node *cur = m_head;
@@ -36,10 +36,10 @@ bool List::remove(string name)
         return false;
     }
     
-    if(cur->m_value->getTitle() == name)
+    if(cur->m_value->getTitle() == name) //Checks the heads value
     {
         Node *tmp = m_head;
-        m_head = m_head->m_next;
+        m_head = m_head->m_next; //Sets the next link to the head
         delete tmp->m_value;
         delete tmp;
         return true;
@@ -47,10 +47,10 @@ bool List::remove(string name)
 
     while(cur->m_next != NULL)
     {
-        if(cur->m_next->m_value->getTitle() == name)
+        if(cur->m_next->m_value->getTitle() == name) //Checks the next links value for deletion
         {
             Node *tmp = cur->m_next;
-            cur->m_next = cur->m_next->m_next;
+            cur->m_next = cur->m_next->m_next; //sets the current pointers m_next to the link two places in front of it
             delete tmp;
             return true;
         }
@@ -61,7 +61,7 @@ bool List::remove(string name)
     }
 }
 
-bool List::freeName(string name)
+bool List::freeName(string name) //Returns whether the entered name exists in the list.
 {
     Node *cur = m_head;
 
@@ -80,13 +80,13 @@ bool List::freeName(string name)
     return true;
 }
 
-void List::insert(Video* video)
+void List::insert(Video* video) //Puts a video into the list in alphabetic order
 {
     if(!(freeName(video->getTitle())))
     {
         return;
     }
-    else if(m_head == NULL || video->getTitle() < m_head->m_value->getTitle())
+    else if(m_head == NULL || video->getTitle() < m_head->m_value->getTitle()) 
     {
         m_head = new Node(video, m_head);
         m_length++;

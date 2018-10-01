@@ -25,7 +25,7 @@ List vid;
 
 int main()
 {
-    while(getline(cin, command))
+    while(getline(cin, command)) //reads until end of input
     {
         if(command == "insert")
         {
@@ -45,7 +45,6 @@ int main()
             if(!vid.search(title))
             {
                 cerr << "Title <" << title << "> not in list.";
-                return 1;
 
             }
         }
@@ -55,7 +54,7 @@ int main()
             if(!vid.remove(title))
             {
                 cerr << "Title <" << title << "> not in list, could not delete."<< endl;
-                //return 1;
+      
             }
         }
         else
@@ -68,13 +67,13 @@ int main()
     return 0;
 }
 
-void insertVid()
+void insertVid() //Reads input needed to create a video object
 {
-    string title = "";
-    string url = "";
-    string comment = "";
-    float length = 0.00;
-    int rating = 0;
+    //string title = "";
+    //string url = "";
+    //string comment = "";
+    //float length = 0.00;
+    //int rating = 0;
 
     getline(cin, title);
     getline(cin, url);
