@@ -44,7 +44,7 @@ int main()
             getline(cin, title);
             if(!vid.search(title))
             {
-                cerr << "Title <" << title << "> not in list.";
+                cerr << "Title <" << title << "> not in list." << endl;
 
             }
         }
