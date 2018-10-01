@@ -24,36 +24,36 @@ List::~List()
 
 bool List::remove(string name)
 {
+
+    Node *cur = m_head;
+
     if(m_head == NULL)
     {
         return false;
     }
-    else if(m_head->m_value->getTitle() == name)
+    
+    if(cur->m_value->getTitle() == name)
     {
-        Node *cur = m_head;
+        Node *tmp = m_head;
         m_head = m_head->m_next;
-        delete cur->m_value;
-        delete cur;
-        m_length--;
-    }   
-    else
-    {
-        Node *cur = m_head;
+        delete tmp->m_value;
+        delete tmp;
+        return true;
+    }
 
-        while(cur->m_next != NULL)
+    while(cur->m_next != NULL)
+    {
+        if(cur->m_next->m_value->getTitle() == name)
         {
-            if(cur->m_next->m_value->getTitle() == name)
-            {
-                Node *tmp = cur->m_next;
-                cur->m_next = cur->m_next->m_next;
-                delete cur->m_value;
-                delete cur;
-                m_length--;
-                return true;
-            }
+            Node *tmp = cur->m_next;
+            cur->m_next = cur->m_next->m_next;
+            delete tmp;
+            return true;
+        }
+        else
+        {
             cur = cur->m_next;
         }
-        return false;
     }
 }
 
