@@ -18,14 +18,14 @@ void Cust::printEntered(ostream &os, int clock)
 {
     assert(clock == time);
     os << clock << ": " << name << " entered store" << endl;
-           
+    
 }
 
 void Cust::printShopped(ostream &os, int clock)
 {
     assert(clock == time);
     os << clock << ": " << name << " done shopping" << endl;
-
+    
 }
 
 void Cust::printCheckout(ostream &os, int clock, int checker)

@@ -80,11 +80,13 @@ int main(int argc, char *argv[])
      
     ofile.close();
     
+    /*
     //Print Output File
     string line = "";
 
     ofile.open(argv[4]);
-
+    
+    
     while(!ofile.eof())
     {
         ofile << line << endl;
@@ -92,6 +94,7 @@ int main(int argc, char *argv[])
     }
 
     ofile.close();
+    */
 
     return 0;
 }
