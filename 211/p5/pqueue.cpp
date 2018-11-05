@@ -1,3 +1,7 @@
+//sim.cpp
+//Beck, Mitchell
+//mbeck16
+
 #include <iostream>
 #include <assert.h>
 #include <string.h>
@@ -8,8 +12,8 @@ using namespace std;
 
 Pqueue::Pqueue()
 {
-        m_head = NULL;
-        m_length = 0;
+    m_head = NULL;
+    m_length = 0;
 }
 
 Pqueue::~Pqueue()
@@ -41,12 +45,16 @@ void Pqueue::enqueue(Cust *cust, int p)
     }
 }
 
-void Pqueue::dequeue()
+Cust *Pqueue::dequeue()
 {
+    Node *tmp = m_head;
 
+    m_head = m_head->m_next;
+
+    return tmp->m_value;
 }
 
-string Pqueue::first_priority()
+int Pqueue::getPriority()
 {
-
+    return m_head->m_p;    
 }

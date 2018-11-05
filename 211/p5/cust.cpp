@@ -1,4 +1,5 @@
 #include <iostream>
+#include <assert.h>
 #include "cust.h"
 
 Cust::Cust(string n, bool r, int t, int i)
@@ -9,11 +10,31 @@ Cust::Cust(string n, bool r, int t, int i)
     items = i;
 }
 
-void Cust::print(ostream &os)
+void Cust::printEntered(ostream &os, int clock)
 {
-    string temp = "shopper";
+    assert(clock == time);
+    os << clock << ": " << name << " entered store" << endl;
+           
+}
 
-    if(robber) temp = "robber";
+void Cust::printShopped(ostream &os, int clock)
+{
+    os << clock << ": " << name << " done shopping" << endl;
 
-    os << name << " " << temp << " " << time << " " << items << endl;
+}
+
+void Cust::printCheckout(ostream &os, int clock, int checker)
+{
+    
+
+}
+
+void Cust::printPaid(ostream &os, int clock)
+{
+
+}
+
+void Cust::printStole(ostream &os, int clock, int amt)
+{
+
 }

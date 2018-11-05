@@ -13,10 +13,10 @@ class Pqueue
         Pqueue();
         ~Pqueue(); 
         bool empty() {return (m_head == NULL);};
-        int length() {return m_length;};
-        string first_priority();
+        int getLength() {return m_length;};
+        int getPriority();
         void enqueue(Cust*, int);
-        void dequeue();
+        Cust *dequeue();
 
     private:
         class Node
@@ -29,6 +29,7 @@ class Pqueue
                 int m_p;
 
         };
+
         Node *m_head;
         int m_length;
 
