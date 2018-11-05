@@ -80,21 +80,17 @@ int main(int argc, char *argv[])
      
     ofile.close();
     
-    /*
     //Print Output File
     string line = "";
 
     ofile.open(argv[4]);
-    
-    
-    while(!ofile.eof())
+       
+    for(int i = 0; i < 10; i++)
     {
         ofile << line << endl;
-    
     }
 
-    ofile.close();
-    */
+    ofile.close();    
 
     return 0;
 }
@@ -104,8 +100,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
     Pqueue shopping;
     Pqueue line;
 
-    //for(int i = 0; i < numCheckers; i++)
-        Checker *checkers = new Checker[numCheckers];
+    Checker *checkers = new Checker[numCheckers];
     
     for(int clock = 1; clock < start.getLength(); clock++)
     {
@@ -114,7 +109,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
             if(clock == start.getPriority())
             {
                 Cust *tmp = start.dequeue();
-                tmp->printEntered(cout, clock);
+                tmp->printEntered(os, clock);
                 int nextTime = tmp->getTime() + (tmp->getItems() * 2);
                 shopping.enqueue(tmp, nextTime);
             }
@@ -125,7 +120,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
             if(clock == shopping.getPriority())
             {
                 Cust *tmp = shopping.dequeue();
-                tmp->printShopped(cout, clock);
+                tmp->printShopped(os, clock);
                 line.enqueue(tmp, 0);
             }
         }
@@ -140,11 +135,11 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
                 if(tmp->getPurpose() == 0)
                 {
                     checkers[i].money += tmp->getItems() * 3;
-                    tmp->printPaid(cout, clock, i);
+                    tmp->printPaid(os, clock, i);
                 }
                 else
                 {
-                    tmp->printStole(cout, clock, checkers[i].money, i);
+                    tmp->printStole(os, clock, checkers[i].money, i);
                     checkers[i].money = 0;
                 }
                 
@@ -172,7 +167,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
                     nextTime = checkers[i].c->getTime() + checkers[i].c->getItems();
                 }
                 
-                checkers[i].c->printCheckout(cout, clock, i);
+                checkers[i].c->printCheckout(os, clock, i);
                 checkers[i].reg.enqueue(checkers[i].c, nextTime);
             }
 
