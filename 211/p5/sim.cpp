@@ -68,42 +68,29 @@ int main(int argc, char *argv[])
     }
     
     ifile.close();
-    
-    //Fill the next queue (shopping) from the file with calculated priority
-    /*
-    ifile.open(argv[3]);
-
-    while(ifile.peek() != EOF)
-    {
-        string name;
-        string purpose;
-        int time;
-        int items;
-        int priority;
-        
-        ifile >> name;
-        ifile >> purpose;
-        ifile >> time;
-        ifile >> items;
-
-        priority = time + 2 * items;
-
-        shopping.enqueue(new Cust(name, (purpose == "robber" ? 1 : 0), time, items), priority);
-
-    }
-
-    ifile.close();
-    */
 
     numCheckers = stoi(argv[1]);
     breakTime = stoi(argv[2]);
 
     ofstream ofile(argv[4]);
 
+    ofile.open(argv[4]);
 
     run_simulation(outside, numCheckers, breakTime, ofile);
      
+    ofile.close();
+    
+    //Print Output File
+    string line = "";
 
+    ofile.open(argv[4]);
+
+    while(!ofile.eof())
+    {
+        cout << line << endl;
+    }
+
+    ofile.close();
 }
 
 void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
