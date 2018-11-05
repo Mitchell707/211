@@ -1,3 +1,7 @@
+//pqueue.h
+//Beck, Mitchell
+//mbeck16
+
 #ifndef PQUEUE_H_
 #define PQUEUE_H_
 

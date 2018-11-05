@@ -1,4 +1,4 @@
-//sim.cpp
+//pqueue.cpp
 //Beck, Mitchell
 //mbeck16
 

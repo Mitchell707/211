@@ -121,7 +121,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
             if(clock == start.getPriority())
             {
                 Cust *tmp = start.dequeue();
-                tmp->printEntered(os, clock);
+                tmp->printEntered(cout, clock);
                 int nextTime = tmp->getTime() + (tmp->getItems() * 2);
                 shopping.enqueue(tmp, nextTime);
             }
@@ -132,7 +132,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
             if(clock == shopping.getPriority())
             {
                 Cust *tmp = shopping.dequeue();
-                tmp->printShopped(os, clock);
+                tmp->printShopped(cout, clock);
                 line.enqueue(tmp, 0);
             }
         }
@@ -147,11 +147,11 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
                 if(tmp->getPurpose() == 0)
                 {
                     checkers[i].money += tmp->getItems() * 3;
-                    tmp->printPaid(os, clock);
+                    tmp->printPaid(cout, clock, i);
                 }
                 else
                 {
-                    tmp->printStole(os, clock, checkers[i].money);
+                    tmp->printStole(cout, clock, checkers[i].money, i);
                     checkers[i].money = 0;
                 }
                 
@@ -179,7 +179,7 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
                     nextTime = checkers[i].c->getTime() + checkers[i].c->getItems();
                 }
                 
-                checkers[i].c->printCheckout(os, clock, i);
+                checkers[i].c->printCheckout(cout, clock, i);
                 checkers[i].reg.enqueue(checkers[i].c, nextTime);
             }
 

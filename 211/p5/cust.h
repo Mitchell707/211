@@ -1,3 +1,7 @@
+//cust.h
+//Beck, Mitchell
+//mbeck16
+
 #ifndef CUST_H_
 #define CUST_H_
 
@@ -13,8 +17,8 @@ class Cust
         void printEntered(ostream&, int);
         void printShopped(ostream&, int);
         void printCheckout(ostream&, int, int /*checker number*/);
-        void printPaid(ostream&, int);
-        void printStole(ostream&, int, int);
+        void printPaid(ostream&, int, int);
+        void printStole(ostream&, int, int, int);
 
         int getTime() {return time;};
         int getItems() {return items;};
