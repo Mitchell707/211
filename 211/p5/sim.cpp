@@ -87,10 +87,13 @@ int main(int argc, char *argv[])
 
     while(!ofile.eof())
     {
-        cout << line << endl;
+        ofile << line << endl;
+    
     }
 
     ofile.close();
+
+    return 0;
 }
 
 void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
