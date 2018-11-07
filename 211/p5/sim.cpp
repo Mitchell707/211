@@ -25,6 +25,9 @@ void run_simulation(Pqueue &, int, int, ostream &os);
 int numCheckers = 0;
 int breakTime = 0;
 
+string inFile;
+string outFile;
+
 //----------------------
 
 struct Checker
@@ -46,23 +49,27 @@ struct Checker
 int main(int argc, char *argv[])
 {
     //READ IN CUSTOMERS FROM A FILE
-        
-    ifstream ifile(argv[3]);
+    
+    string line;
+    
+    string name;
+    string purpose;
+    int enterTime;
+    int items;
 
-    ifile.open(argv[3]);
+    inFile = argv[3];
+    outFile = argv[4];
 
-    while(ifile.peek() != EOF)
+    ifstream ifile;
+    
+    ifile.open(inFile);
+    
+    while(ifile >> name)
     {
-        string name;
-        string purpose;
-        int enterTime;
-        int items;
-
-        ifile >> name;
         ifile >> purpose;
         ifile >> enterTime;
         ifile >> items;
-
+        
         outside.enqueue(new Cust(name, (purpose == "robber" ? 1 : 0), enterTime, items), enterTime);    
 
     }
@@ -72,50 +79,41 @@ int main(int argc, char *argv[])
     numCheckers = stoi(argv[1]);
     breakTime = stoi(argv[2]);
 
-    ofstream ofile(argv[4]);
+    ofstream ofile(outFile);
 
-    ofile.open(argv[4]);
+    ofile.open(outFile);
 
     run_simulation(outside, numCheckers, breakTime, ofile);
      
     ofile.close();
     
-    //Print Output File
-    string line = "";
-
-    ofile.open(argv[4]);
-       
-    for(int i = 0; i < 10; i++)
-    {
-        ofile << line << endl;
-    }
-
-    ofile.close();    
-
     return 0;
 }
 
-void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
+void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream & os)
 {
     Pqueue shopping;
     Pqueue line;
 
     Checker *checkers = new Checker[numCheckers];
     
-    for(int clock = 1; clock < start.getLength(); clock++)
-    {
-        for(int i = 0; i < start.getLength(); i++)
+    int num_cust = start.getLength();
+    
+    for(int clock = 1; num_cust > 0 ; clock++)
+    {    
+        while(!start.isEmpty() && clock == start.getPriority())
         {
-            if(clock == start.getPriority())
-            {
-                Cust *tmp = start.dequeue();
-                tmp->printEntered(os, clock);
-                int nextTime = tmp->getTime() + (tmp->getItems() * 2);
-                shopping.enqueue(tmp, nextTime);
-            }
+            Cust *tmp = start.dequeue();
+                
+            tmp->printEntered(os, clock);
+                
+            int nextTime = clock + (tmp->getItems() * 2);
+             
+            shopping.enqueue(tmp, nextTime);
+            
         }
 
-        for(int i = 0; i < shopping.getLength(); i++)
+        for(int i = 0; i < num_cust; i++)
         {
             if(clock == shopping.getPriority())
             {
@@ -126,53 +124,61 @@ void run_simulation(Pqueue &start, int numCheckers, int breakTime, ostream &os)
         }
         
         //Finishes Checkout
-        for(int i = 0; i < numCheckers; i++)
+        for(int i = 1; i < numCheckers; i++)
         {
-            Cust *tmp = checkers[i].c;
-
-            if(checkers[i].reg.getPriority() == clock)
+        
+            if(checkers[i].c == NULL)
             {
-                if(tmp->getPurpose() == 0)
+                Cust *tmp = checkers[i].c;
+            
+
+                if(checkers[i].reg.getPriority() == clock)
                 {
-                    checkers[i].money += tmp->getItems() * 3;
-                    tmp->printPaid(os, clock, i);
-                }
-                else
-                {
-                    tmp->printStole(os, clock, checkers[i].money, i);
-                    checkers[i].money = 0;
-                }
+                    if(tmp->getPurpose()) //SEG FAULT AT THIS LINE
+                    {
+                        cout << "Purpose" << endl;
+                        checkers[i].money += tmp->getItems() * 3;
+                        tmp->printPaid(os, clock, i);
+                    }
+                    else
+                    {
+                        tmp->printStole(os, clock, checkers[i].money, i);
+                        checkers[i].money = 0;
+                    }
                 
-                checkers[i].c = NULL;
-                delete tmp;
-                
+                    checkers[i].c = NULL;
+                    num_cust--;
+                    delete tmp;
+               
+                }   
+
             }
 
         }
-        
-        //Puts custs on available checkers
+                
+        //Puts customer on to available checker
         for(int i = 0; i < numCheckers; i++)
         {
-            if(checkers[i].c == NULL)
+            if(checkers[i].c == NULL && line.isEmpty() == false)
             {
+                Cust *tmp = line.dequeue();
+                           
                 int nextTime = 0;
-                checkers[i].c = line.dequeue();
                 
-                if(checkers[i].c->getPurpose())
+                if(tmp->getPurpose())
                 {
-                    nextTime = checkers[i].c->getTime() + 7;
+                    
+                    nextTime = tmp->getTime() + 7;
                 }
                 else
                 {
-                    nextTime = checkers[i].c->getTime() + checkers[i].c->getItems();
+                    nextTime = tmp->getTime() + tmp->getItems();
                 }
                 
-                checkers[i].c->printCheckout(os, clock, i);
+                tmp->printCheckout(os, clock, i);
                 checkers[i].reg.enqueue(checkers[i].c, nextTime);
             }
 
-            //if checkers current cust priority = clock
-            
         }
 
     }

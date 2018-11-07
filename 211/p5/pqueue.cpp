@@ -29,7 +29,7 @@ Pqueue::~Pqueue()
 
 void Pqueue::enqueue(Cust *cust, int p)
 {
-    if((!m_head || m_head->m_p) > p)
+    if(!m_head)
     {
         m_head = new Node(cust, p, m_head);
     }
@@ -43,18 +43,36 @@ void Pqueue::enqueue(Cust *cust, int p)
         assert(cur != NULL);
         cur->m_next = new Node(cust, p, cur->m_next);       
     }
+
+    m_length++;
 }
 
 Cust *Pqueue::dequeue()
 {
-    Node *tmp = m_head;
+    if(m_head)
+    {
+        Node *tmp = m_head;
+    
+        m_head = m_head->m_next;
 
-    m_head = m_head->m_next;
+        m_length--;
 
-    return tmp->m_value;
+        return tmp->m_value;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 int Pqueue::getPriority()
 {
-    return m_head->m_p;    
+    if(m_head)
+    {
+        return m_head->m_p;    
+    }
+    else
+    {
+        return NULL;
+    }
 }

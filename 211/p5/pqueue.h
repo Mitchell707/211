@@ -16,7 +16,7 @@ class Pqueue
     public:
         Pqueue();
         ~Pqueue(); 
-        bool empty() {return (m_head == NULL);};
+        bool isEmpty() {return (m_head == NULL);};
         int getLength() {return m_length;};
         int getPriority();
         void enqueue(Cust*, int);
@@ -30,7 +30,7 @@ class Pqueue
                 {m_value = cust; m_p = p; m_next = next;}
                 Cust *m_value;
                 Node *m_next;
-                int m_p;
+                int m_p = 0;
 
         };
 

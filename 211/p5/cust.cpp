@@ -17,34 +17,50 @@ Cust::Cust(string n, bool r, int t, int i)
 void Cust::printEntered(ostream &os, int clock)
 {
     assert(clock == time);
-    cout << clock << ": " << name << " entered store" << endl;
+    os << clock << ": " << name << " entered store" << endl;
     
 }
 
 void Cust::printShopped(ostream &os, int clock)
 {
-    assert(clock == time);
-    cout << clock << ": " << name << " done shopping" << endl;
+    //assert(clock == time);
+    os << clock << ": " << name << " done shopping" << endl;
     
 }
 
 void Cust::printCheckout(ostream &os, int clock, int checker)
 {
-    assert(clock == time);
-    cout << clock << ": " << name << " started checkout with checker " << checker << endl;
+    //assert(clock == time);
+    os << clock << ": " << name << " started checkout with checker " << checker << endl;
 
 }
 
 void Cust::printPaid(ostream &os, int clock, int checker)
 {
-    assert(clock == time);
-    cout << clock << ": " << name << " paid $" << (items * 3) << " for " << items << " items to checker " << checker << endl;
+    //assert(clock == time);
+    os << clock << ": " << name << " paid $" << (items * 3) << " for " << items << " items to checker " << checker << endl;
 
 }
 
 void Cust::printStole(ostream &os, int clock, int amt, int checker)
 {
-    assert(clock == time);
-    cout << clock << ": " << name << " stole $" << amt << " and " << items << " items from checker " << checker << endl;
+    //assert(clock == time);
+    os << clock << ": " << name << " stole $" << amt << " and " << items << " items from checker " << checker << endl;
 
 }
+/*
+int Cust::getTime()
+{
+    return time;
+}
+
+int Cust::getItems()
+{
+    return items;
+}
+
+bool Cust::getPurpose()
+{
+    return robber;
+}
+*/
