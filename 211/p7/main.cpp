@@ -39,6 +39,10 @@ int main()
             getline(cin, temp);
             if(tree.find(temp) == true)
             {
+                cout << "<" << temp << "> is in tree." << endl;
+            }
+            else
+            {
                 cout << "<" << temp << "> is not in tree." << endl;
             }
         }
@@ -66,17 +70,17 @@ int main()
         }
         else if(command == "distance")
         {
-            cout << "average distance of nodes to root = " << tree.distance() << endl;
+            cout << "Average distance of nodes to root = " << tree.distance() << endl;
         }
         else if(command == "balanced")
         {
             if(tree.balanced())
             {
-                cout << "Tree is balanced" << endl;
+                cout << "Tree is balanced." << endl;
             }
             else
             {
-                cout << "Tree is not balanced" << endl;
+                cout << "Tree is not balanced." << endl;
             }
         }
         else if(command == "rebalance")
@@ -91,7 +95,7 @@ int main()
         }
         else
         {
-            cerr << "illegal command <" << command << ">." << endl;
+            cerr << "Illegal command <" << command << ">." << endl;
         }
 
     }
