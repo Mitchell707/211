@@ -22,14 +22,14 @@ Bst::~Bst()
 
 bool Bst::insert(string str, Node *cur)
 {
-    if(m_root->m_value.empty())
+    if(m_root->m_value.empty()) //Will initialize a Node with two Null children if the tree is empty
     {
         m_root->m_value = str;
         m_root->right = NULL;
         m_root->left = NULL;
         length++;
     }
-    else if(str < cur->m_value)
+    else if(str < cur->m_value) //handles the left insertion
     {
         if(cur->left != NULL)
         {
@@ -44,7 +44,7 @@ bool Bst::insert(string str, Node *cur)
             length++;
         }
     }
-    else if(str > cur->m_value)
+    else if(str > cur->m_value) //handles the right insertion
     {
         if(cur->right != NULL)
         {   
@@ -59,7 +59,7 @@ bool Bst::insert(string str, Node *cur)
             length++;
         }
     }
-    else if(str == cur->m_value)
+    else if(str == cur->m_value) //returns false when a string is already in the tree
     {
         return false;
     }
@@ -68,7 +68,7 @@ bool Bst::insert(string str, Node *cur)
 
 }
 
-bool Bst::find(string str, Node *cur)
+bool Bst::find(string str, Node *cur) //traverses whole tree while comparing values
 {
     if(!cur)
     {
@@ -101,16 +101,32 @@ void Bst::print(vector <string> &str, Node *cur, int pos)
     print(str, cur->right, pos);
 }
 
-void Bst::breadth(vector <string> &str, Node *cur, int pos)
-{     
+void Bst::printLevel(vector <string> &str, Node *cur, int pos) //used by breadth search function
+{
     if(!cur)
     {
         return;
     }
+    
+    if(pos == 1) //traverses down tree until it gets to the correct level(pos == 1) then prints left to right.
+    {
+        str.push_back(cur->m_value);
+    }
+    else if(pos > 1)
+    {
+        printLevel(str, cur->left, pos - 1);
+        printLevel(str, cur->right, pos - 1);
+    }
+}
 
-    str.push_back(cur->m_value);
-    breadth(str, cur->left, pos);
-    breadth(str, cur->right, pos);
+void Bst::breadth(vector <string> &str, Node *cur, int pos)
+{     
+    int l = size();
+
+    for(int i = 1; i <= l; i++)
+    {
+        printLevel(str, cur, i);
+    }
 }
 
 double Bst::distance()
@@ -119,7 +135,7 @@ double Bst::distance()
     return total / length;
 }
 
-void Bst::distance(Node *cur, int dist)
+void Bst::distance(Node *cur, int dist) //gets cumulative distance from root to leafs
 {
     if(!cur)
     {
@@ -132,7 +148,7 @@ void Bst::distance(Node *cur, int dist)
     distance(cur->left, dist + 1);
 }
 
-bool Bst::balanced(Node *cur, int length)
+bool Bst::balanced(Node *cur, int length) //checks the bottom leaf size each and returns true or false if the size is within one
 {
     int leftH = 0;
     int rightH = 0;

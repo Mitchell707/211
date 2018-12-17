@@ -44,6 +44,7 @@ class Bst
         bool find(string str, Node *cur);
         void print(vector <string> &, Node *cur, int);
         void breadth(vector <string> &, Node *cur, int);
+        void printLevel(vector <string> &, Node *cur, int);
         void distance(Node *cur, int);
         bool balanced(Node *cur, int);
 

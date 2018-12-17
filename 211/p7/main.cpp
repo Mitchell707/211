@@ -46,7 +46,7 @@ int main()
                 cout << "<" << temp << "> is not in tree." << endl;
             }
         }
-        else if(command == "print")
+        else if(command == "print") //handles the output for the print function
         {
             tree.print();
             cout << "{";
@@ -57,7 +57,7 @@ int main()
             cout << tree.strings[tree.size() - 1] << "}" << endl;
             tree.strings.clear();
         }
-        else if(command == "breadth")
+        else if(command == "breadth") //handles the output for the breadth function
         {
             tree.breadth();
             cout << "{";
@@ -96,13 +96,14 @@ int main()
         else
         {
             cerr << "Illegal command <" << command << ">." << endl;
+            return 1;
         }
 
     }
 
 }
 
-string echo(string str)
+string echo(string str) //prints entered string
 {
     cout << str << endl;
 }
