@@ -24,7 +24,7 @@ class Bst
         void print() {return print(strings, m_root, pos);}
         void breadth() {return breadth(strings, m_root, pos);}
         double distance();
-        bool balanced() {return balanced(m_root, length);};
+        bool balanced() {return balanced(m_root);};
         void rebalance();
 
         vector <string> strings;
@@ -46,7 +46,8 @@ class Bst
         void breadth(vector <string> &, Node *cur, int);
         void printLevel(vector <string> &, Node *cur, int);
         void distance(Node *cur, int);
-        bool balanced(Node *cur, int);
+        bool balanced(Node *cur);
+        int height(Node *cur);
 
         int mid;
         int pos;

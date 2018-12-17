@@ -148,28 +148,38 @@ void Bst::distance(Node *cur, int dist) //gets cumulative distance from root to 
     distance(cur->left, dist + 1);
 }
 
-bool Bst::balanced(Node *cur, int length) //checks the bottom leaf size each and returns true or false if the size is within one
+int Bst::height(Node* cur)
+{
+    if(!cur)
+    {
+        return 0;
+    }
+
+    return 1 + max(height(cur->left), height(cur->right));
+}
+
+bool Bst::balanced(Node *cur) //checks the bottom leaf size each and returns true or false if the size is within one
 {
     int leftH = 0;
     int rightH = 0;
         
     if(!cur)
     {
-        length = 0;
         return true;
     }
 
-    bool l = balanced(cur->left, leftH);
-    bool r = balanced(cur->right, rightH);
+    leftH = height(cur->left);
+    rightH = height(cur->right);
 
-    length = max(leftH, rightH) + 1;
+    bool l = balanced(cur->left);
+    bool r = balanced(cur->right);
 
-    if(abs(leftH - rightH) > 1)
+    if(abs(leftH - rightH) <= 1 && l && r)
     {
-        return false;
+        return 1;
     }
 
-    return (l && r);
+    return 0;
 
 }
 
