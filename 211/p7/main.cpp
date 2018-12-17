@@ -76,11 +76,11 @@ int main()
         {
             if(tree.balanced())
             {
-                cout << "Tree is not balanced." << endl;
+                cout << "Tree is balanced." << endl;
             }
             else
             {
-                cout << "Tree is balanced." << endl;
+                cout << "Tree is not balanced." << endl;
             }
         }
         else if(command == "rebalance")
@@ -96,7 +96,7 @@ int main()
         else
         {
             cerr << "Illegal command <" << command << ">." << endl;
-            return 1;
+        
         }
 
     }
